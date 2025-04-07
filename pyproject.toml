@@ -31,7 +31,8 @@ dependencies = [
     "requests",
     "six",
     "openai",
-    "rich"
+    "rich",
+    "security==1.3.1"
 ]
 
 [project.optional-dependencies]
