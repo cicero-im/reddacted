@@ -1,5 +1,5 @@
 openai>=1.0.0,<2.0.0
-requests==2.31.0
+requests==2.32.4
 six==1.10.0
 cliff==4.3.0
 nltk==3.6.6
