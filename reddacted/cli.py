@@ -14,7 +14,7 @@ from reddacted.utils.logging import get_logger, with_logging, set_global_logging
 from reddacted.utils.exceptions import handle_exception
 from reddacted.sentiment import Sentiment
 from reddacted.api.reddit import Reddit
-import requests
+from security import safe_requests
 
 # Configure logging format
 logging.basicConfig(
@@ -316,14 +316,14 @@ class CLI(App):
 
             try:
                 # Verify Ollama connection
-                response = requests.get(base_url)
+                response = safe_requests.get(base_url)
                 if response.status_code != 200:
                     console.print(f"[red]Error: Could not connect to Ollama at {base_url}[/]")
                     return None
 
                 # Get available models
                 models_url = f"{base_url}/api/tags"
-                response = requests.get(models_url)
+                response = safe_requests.get(models_url)
                 if response.status_code != 200:
                     console.print(f"[red]Error: Could not fetch models: {response.status_code}[/]")
                     return None

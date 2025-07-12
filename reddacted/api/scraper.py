@@ -1,8 +1,8 @@
 from types import BuiltinMethodType
-import requests
 from reddacted.api import api
 from reddacted.utils.logging import get_logger, with_logging
 from reddacted.utils.exceptions import handle_exception
+from security import safe_requests
 
 logger = get_logger(__name__)
 
@@ -32,7 +32,7 @@ class Scraper(api.API):
         logger.debug_with_context(f"Request URL: {url}")
         logger.debug_with_context(f"Request headers: {headers}")
         try:
-            response = requests.get(url, headers=headers)
+            response = safe_requests.get(url, headers=headers)
             logger.debug_with_context(f"Response status code: {response.status_code}")
         except Exception as e:
             handle_exception(e, "Error obtaining article information", debug=True)
@@ -83,7 +83,7 @@ class Scraper(api.API):
         logger.debug_with_context(f"Completed scraping for user {username}")
         headers = kwargs.get('headers')
         try:
-            response = requests.get(url, headers = headers)
+            response = safe_requests.get(url, headers = headers)
         except Exception as e:
             handle_exception(e, "Error obtaining user information", debug=True)
             return []
